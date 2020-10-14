@@ -7,7 +7,7 @@ import Link from 'next/link'
 
 export default function Home() 
 {
-  request();
+  //request();
   return (<>
   <Header textAlign = "center">
     Welcome to the restaurant app!
@@ -27,9 +27,11 @@ export default function Home()
   </>);
 }
 
+/*
 async function request()
 {
   const url = "http://localhost:3000/api/menu"
   const response = await axios.get(url);
   console.log(response.data);
 }
+*/
