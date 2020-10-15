@@ -5,15 +5,15 @@ const { String, Number } = mongoose.Schema.Types;
 const MenuItemSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: false
+        required: true
     },
     price: {
         type: Number,
-        required: false
+        required: true
     },
     category: {
         type: String,
-        required: false
+        required: true
     }
 }, {collection: 'menuitems'});
 

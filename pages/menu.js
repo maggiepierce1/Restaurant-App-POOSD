@@ -1,8 +1,42 @@
-import { List, Header, Grid } from 'semantic-ui-react'
+import { List, Header, Grid, Menu, Container } from 'semantic-ui-react'
 import axios from 'axios'
 
-function Menu({ menuItems })
+function MenuPage({ menuItems })
 {
+    return (<>
+        <Header color = "teal" textAlign = "center">
+            This is the menu.
+        </Header>
+        <Grid columns={3} divided textAlign = "center" verticalAlign = "middle">
+          <Grid.Row>
+            <Grid.Column>
+                APPETIZERS
+                <Menu vertical fluid>
+                {menuItems.map((menuItem) => (
+                <Menu.Item>{menuItem.name}. . .{menuItem.price}</Menu.Item>
+                ))}
+                </Menu>
+            </Grid.Column>
+            <Grid.Column>
+                ENTREES
+                <Menu vertical fluid>
+                {menuItems.map((menuItem) => (
+                <Menu.Item>{menuItem.name}. . .{menuItem.price}</Menu.Item>
+                 ))}
+                </Menu>
+            </Grid.Column>
+            <Grid.Column>
+                DESSERTS
+                <Menu vertical fluid>
+                {menuItems.map((menuItem) => (
+                <Menu.Item>{menuItem.name}. . .{menuItem.price}</Menu.Item>
+                 ))}
+                </Menu>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </>);
+      /*
     return (<>
         <Header textAlign = "center">
             This is the menu.
@@ -13,6 +47,7 @@ function Menu({ menuItems })
         ))}
         </List>
       </>);
+      */
 }
 
 export async function getStaticProps()
@@ -24,4 +59,4 @@ export async function getStaticProps()
   return {props : { menuItems } };
 }
 
-export default Menu;
+export default MenuPage;
