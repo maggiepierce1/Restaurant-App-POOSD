@@ -19,40 +19,52 @@ function MenuPage({ menuItems })
             <Grid.Column>
                 APPETIZERS
                 <Menu vertical fluid>
-                    {menuItems.map((menuItem) => (
-                    <Menu.Item>{menuItem.name}. . .{menuItem.price}
-                        <Popup
-                        trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
-                        content="Click here to add this item to your cart"
-                        basic/>
-                    </Menu.Item>
-                ))}
+                    {menuItems.map((menuItem) => 
+                    {
+                        if (menuItem.category == "appetizer")
+                        {
+                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
+                                <Popup
+                                trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
+                                content = "Click here to add this item to your cart"
+                                basic/>
+                            </Menu.Item>);
+                        }
+                    })}
                 </Menu>
             </Grid.Column>
             <Grid.Column>
                 ENTREES
                 <Menu vertical fluid>
-                {menuItems.map((menuItem) => (
-                <Menu.Item>{menuItem.name}. . .{menuItem.price}
-                    <Popup
-                    trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
-                    content="Click here to add this item to your cart"
-                    basic/>
-                </Menu.Item>
-                 ))}
+                    {menuItems.map((menuItem) => 
+                    {
+                        if (menuItem.category == "entree")
+                        {
+                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
+                                <Popup
+                                trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
+                                content = "Click here to add this item to your cart"
+                                basic/>
+                            </Menu.Item>);
+                        }
+                    })}
                 </Menu>
             </Grid.Column>
             <Grid.Column>
                 DESSERTS
                 <Menu vertical fluid>
-                {menuItems.map((menuItem) => (
-                <Menu.Item>{menuItem.name}. . .{menuItem.price}
-                    <Popup
-                    trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
-                    content="Click here to add this item to your cart"
-                    basic/>
-                </Menu.Item>
-                 ))}
+                    {menuItems.map((menuItem) => 
+                    {
+                        if (menuItem.category == "dessert")
+                        {
+                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
+                                <Popup
+                                trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
+                                content = "Click here to add this item to your cart"
+                                basic/>
+                            </Menu.Item>);
+                        }
+                    })}
                 </Menu>
             </Grid.Column>
           </Grid.Row>
@@ -71,7 +83,7 @@ export async function getStaticProps()
 
 export async function addToCart(itemName, userName)
 {
-    const url = "http://localhost:3000/api/cart"
+    const url = "http://localhost:3000/api/updateCart"
     const response = await axios.post(url, { itemName, userName });
 }
 
