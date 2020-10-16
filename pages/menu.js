@@ -1,18 +1,17 @@
-import { Header, Grid, Menu, Popup, Button, Divider } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem } from 'semantic-ui-react'
 import axios from 'axios'
-
-
 
 function MenuPage({ menuItems })
 {
     function handleClick(e)
     {
         alert(e.currentTarget.value);
-        // addToCart(e.currentTarget.value);
+        var name = prompt("please enter your name");
+        addToCart(e.currentTarget.value, name);
         e.preventDefault();
     }
     return (<>
-        <Header color = "teal" textAlign = "center" inverted>
+        <Header size = "huge" color = "teal" textAlign = "center">
             This is the menu.
         </Header>
         <Grid columns={3} divided textAlign = "center" verticalAlign = "middle">
@@ -68,12 +67,12 @@ export async function getStaticProps()
   const menuItems = response.data;
   return {props : { menuItems } };
 }
-/*
 
-export async function addToCart(name)
+
+export async function addToCart(itemName, userName)
 {
     const url = "http://localhost:3000/api/cart"
-    const response = await axios.post(url, { name : {name}});
+    const response = await axios.post(url, { itemName, userName });
 }
-*/
+
 export default MenuPage;
