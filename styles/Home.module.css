@@ -16,6 +16,11 @@
   align-items: center;
 }
 
+.alignButtonRight {
+  display: flex;
+  margin-left: auto;
+}
+
 .footer {
   width: 100%;
   height: 100px;

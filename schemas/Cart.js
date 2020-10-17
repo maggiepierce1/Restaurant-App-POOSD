@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const { String } = mongoose.Schema.Types;
+const { String, Number } = mongoose.Schema.Types;
 
 const CartSchema = new mongoose.Schema({
     username: {
@@ -9,7 +9,7 @@ const CartSchema = new mongoose.Schema({
     },
     items: [{
         name: String,
-        price: String
+        price: Number
     }],
     numItems: {
         type: Number,

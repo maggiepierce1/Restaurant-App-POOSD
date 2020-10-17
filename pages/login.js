@@ -7,13 +7,17 @@ class Login extends React.Component
   constructor(props)
   {
     super(props);
-    this.state = {value: ''};
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.username = React.createRef();
+    this.password = React.createRef();
   }
 
   handleSubmit(event)
   {
-    console.log("oooh, something was submitted!");
+    if (!validateUserCredentials(this.username.current.value, this.password.current.value))
+    {
+      alert("Invalid username or password. Please try again.");
+    }
     event.preventDefault();
   }
 
@@ -27,14 +31,14 @@ class Login extends React.Component
         <Form onSubmit = {this.handleSubmit}>
             <Form.Field>
             <label>Username</label>
-            <input placeholder = 'Username'/>
+            <input type = "text" ref = {this.username} placeholder = 'Username'/>
             </Form.Field>
             <Form.Field>
             <label>Password</label>
-            <input placeholder = 'Password'/>
+            <input type = "text" ref = {this.password} placeholder = 'Password'/>
             </Form.Field>
             <Link href = "/customerhome">
-                <Form.Button> 
+                <Form.Button>
                     Log in as customer
                 </Form.Button>
             </Link>
@@ -43,10 +47,17 @@ class Login extends React.Component
                     Log in as employee
                 </Form.Button>
             </Link>
+        <input type = "submit"/>
         </Form>
     </Container>
     </>);
   }
+}
+
+export async function validateUserCredentials(username, password)
+{
+  localStorage.setItem('username', username);
+  return true;
 }
 
 export default Login;
