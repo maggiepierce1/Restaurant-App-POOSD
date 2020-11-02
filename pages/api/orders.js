@@ -1,12 +1,11 @@
 import connectToDatabase from "../../utils/connectToDatabase"
-import MenuItem from "../../schemas/MenuItem"
+import Order from "../../schemas/Order"
 
 connectToDatabase();
 
 export default async (req, res) => 
 {
-    const menuItems = await MenuItem.find();
+    const orders = await Order.find();
     res.statusCode = 200;
-    res.json(menuItems);
+    res.json(orders);
 }
-

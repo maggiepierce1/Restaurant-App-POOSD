@@ -1,6 +1,7 @@
 import { Header, Grid, Menu, Popup, Button, Divider, MenuItem } from 'semantic-ui-react'
 import axios from 'axios'
 
+// class MenuPage extends React.Component
 function MenuPage({ menuItems })
 {
     function handleClick(e)

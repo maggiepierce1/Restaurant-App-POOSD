@@ -8,9 +8,17 @@ class CustomerHome extends React.Component
         return (<>
         <Link href = "/menu">
             <Button>
-                Go to menu.
+                View menu
             </Button>
         </Link>
+        <Link href = "/cart">
+            <Button>
+                View cart
+            </Button>
+        </Link>
+            <Button>
+                Check out
+            </Button>
         </>);
     }
 }
