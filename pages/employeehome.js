@@ -6,16 +6,23 @@ import React, { useState } from 'react';
 function OrderPage({ orders })
 {
     const [mOpen, setOpen] = useState(false);
-    const [currOrder, setCurrOrder] = useState(null);
+    const [currOrder, setCurrOrder] = useState("");
 
     function triggerOrderDetailsModal(e)
     {
         setOpen(true);
+        setCurrOrder(e.currentTarget.value);
         e.preventDefault();
     }
     function closeModal(e)
     {
       setOpen(false);
+      e.preventDefault();
+    }
+    function updateOrderStatus(e)
+    {
+      const status = e.currentTarget.value;
+      updateStatus(currOrder, status);
       e.preventDefault();
     }
     return (<>
@@ -30,16 +37,16 @@ function OrderPage({ orders })
                     {
                       return (<Menu.Item>Order for {order.username}
                               <Popup
-                              trigger={<Button value = {order} icon='add' compact onClick = {triggerOrderDetailsModal}/>}
+                              trigger={<Button value = {order.username} icon='add' compact onClick = {triggerOrderDetailsModal}/>}
                               content = "Click here to view order details"
                               basic/>
                               <Modal open = {mOpen} closeIcon onClose = {closeModal}>
-                                 Update the Status of this order:
                                  <Modal.Content>
-                                   <Button>Received</Button>
-                                   <Button>Preparing</Button>
-                                   <Button>Done</Button>
-                                   <Button>Picked Up</Button>
+                                   <Header>Update the status of this order:</Header>
+                                   <Button value = {"received"} onClick = {updateOrderStatus}>Received</Button>
+                                   <Button value = {"preparing"} onClick = {updateOrderStatus}>Preparing</Button>
+                                   <Button value = {"done"} onClick = {updateOrderStatus}>Done</Button>
+                                   <Button value = {"picked up"} onClick = {updateOrderStatus}>Picked Up</Button>
                                  </Modal.Content>
                                </Modal>
                             </Menu.Item>);
@@ -49,6 +56,12 @@ function OrderPage({ orders })
           </Grid.Row>
         </Grid>
       </>);
+}
+
+export async function updateStatus(username, newStatus)
+{
+    const url = "http://localhost:3000/api/updateOrder"
+    const response = await axios.post(url, { username, newStatus });
 }
 
 export async function getStaticProps()
