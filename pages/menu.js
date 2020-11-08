@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Container } from 'semantic-ui-react'
 import axios from 'axios'
 
 // class MenuPage extends React.Component
@@ -16,59 +16,68 @@ function MenuPage({ menuItems })
             This is the menu.
         </Header>
         <Grid columns={3} divided textAlign = "center" verticalAlign = "middle">
-          <Grid.Row>
-            <Grid.Column>
-                APPETIZERS
+          <Grid.Column>
+            <Grid.Row>
+                <Header block>Appetizers</Header>
                 <Menu vertical fluid>
                     {menuItems.map((menuItem) => 
                     {
                         if (menuItem.category == "appetizer")
                         {
-                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
-                                <Popup
-                                trigger={<div className = "alignButtonRight"><Button value = {menuItem.name} icon = 'add' compact onClick = {handleClick}/></div>}
-                                content = "Click here to add this item to your cart"
-                                basic/>
+                            return (<Menu.Item>
+                                <Grid>        
+                                    <Grid.Column width = '8'><Container fluid text textAlign = 'left'>{menuItem.name}  (${menuItem.price})</Container></Grid.Column>
+                                    <Popup
+                                    trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {menuItem.name} icon = 'add' compact onClick = {handleClick}/></Container></Grid.Column>}
+                                    content = "Click here to add this item to your cart"
+                                    basic/>      
+                                </Grid>
                             </Menu.Item>);
                         }
                     })}
                 </Menu>
-            </Grid.Column>
-            <Grid.Column>
-                ENTREES
+            </Grid.Row>
+            <Grid.Row>
+            <Header block>Entrees</Header>
                 <Menu vertical fluid>
                     {menuItems.map((menuItem) => 
                     {
                         if (menuItem.category == "entree")
                         {
-                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
-                                <Popup
-                                trigger={<div className = "alignButtonRight"><Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/></div>}
-                                content = "Click here to add this item to your cart"
-                                basic/>
+                            return (<Menu.Item>
+                                <Grid>        
+                                    <Grid.Column width = '8'><Container fluid text textAlign = 'left'>{menuItem.name}  (${menuItem.price})</Container></Grid.Column>
+                                    <Popup
+                                    trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {menuItem.name} icon = 'add' compact onClick = {handleClick}/></Container></Grid.Column>}
+                                    content = "Click here to add this item to your cart"
+                                    basic/>      
+                                </Grid>
                             </Menu.Item>);
                         }
                     })}
                 </Menu>
-            </Grid.Column>
-            <Grid.Column>
-                DESSERTS
+            </Grid.Row>
+            <Grid.Row>
+                <Header block>Desserts</Header>
                 <Menu vertical fluid>
                     {menuItems.map((menuItem) => 
                     {
                         if (menuItem.category == "dessert")
                         {
-                            return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
-                                <Popup
-                                trigger={<div className = "alignButtonRight"><Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/></div>}
-                                content = "Click here to add this item to your cart"
-                                basic/>
+                            return (<Menu.Item>
+                                <Grid>        
+                                    <Grid.Column width = '8'><Container fluid text textAlign = 'left'>{menuItem.name}  (${menuItem.price})</Container></Grid.Column>
+                                    <Popup
+                                    trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {menuItem.name} icon = 'add' compact onClick = {handleClick}/></Container></Grid.Column>}
+                                    content = "Click here to add this item to your cart"
+                                    basic/>      
+                                </Grid>
                             </Menu.Item>);
                         }
                     })}
                 </Menu>
-            </Grid.Column>
-          </Grid.Row>
+            </Grid.Row>
+          </Grid.Column>
         </Grid>
       </>);
 }
