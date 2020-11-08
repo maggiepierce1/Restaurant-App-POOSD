@@ -37,6 +37,7 @@ function MenuPage({ menuItems })
                     })}
                 </Menu>
             </Grid.Row>
+            <Divider horizontal></Divider>
             <Grid.Row>
             <Header block>Entrees</Header>
                 <Menu vertical fluid>
@@ -57,6 +58,7 @@ function MenuPage({ menuItems })
                     })}
                 </Menu>
             </Grid.Row>
+            <Divider horizontal></Divider>
             <Grid.Row>
                 <Header block>Desserts</Header>
                 <Menu vertical fluid>

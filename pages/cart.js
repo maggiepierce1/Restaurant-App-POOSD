@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon } from 'semantic-ui-react'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -13,6 +13,7 @@ class Cart extends React.Component
         this.state = {total : 0.00};
         this.state = {totalWithTax : 0.00};
         this.state = {username : ""};
+        this.state = {hasCartItems : false};
     }
     async componentDidMount()
     {
@@ -24,6 +25,7 @@ class Cart extends React.Component
         this.setState({total : finalTotal})
         this.setState({totalWithTax : finalTotalWithTax});
         this.setState({data : items});
+        this.setState({hasCartItems : true});
     }
     handlePayment(e)
     {
@@ -33,28 +35,35 @@ class Cart extends React.Component
     }
     render()
     {
-        return (<>
-            <Header size = "huge" color = "teal" textAlign = "center">
-                Your Cart:
-            </Header>
-            <Grid style={{ height: '100vh' }} textAlign = "center" verticalAlign = "middle">
-                <Grid.Column style={{ maxWidth: 450 }}>
-                    <Menu vertical fluid>
-                        {this.state.data  && this.state.data.map(function (cartItem)
-                        {
-                            return (<Menu.Item>{cartItem.name}. . .{cartItem.price}</Menu.Item>);
-                        })}
-                    </Menu>
-                    <Grid.Row>Total : {this.state.total}</Grid.Row>
-                    <Grid.Row>Total with tax added : {this.state.totalWithTax}</Grid.Row>
-                    <Link href = "/orderstatus">
-                        <Button onClick = {this.handlePayment}>
-                            Pay Now
-                        </Button> 
-                    </Link>
-                </Grid.Column>
-            </Grid>
-        </>);
+        if (this.state.hasCartItems)
+        {
+            return (<>
+                <Grid style={{ height: '100vh' }} textAlign = "center" verticalAlign = "middle">
+                    <Grid.Column style={{ maxWidth: 450 }}>
+                        <Header size = "huge" color = "teal" textAlign = "center">
+                            Items in your cart:
+                        </Header>
+                        <Segment size = "massive" stacked>                  
+                            {this.state.data  && this.state.data.map(function (cartItem)
+                            {
+                                return (<Container textAlign = "left" fluid text>{cartItem.name} (${cartItem.price})</Container>);
+                            })}
+                            <Divider horizontal><Icon name = "star"></Icon></Divider>
+                            <Container textAlign = "left" fluid text>Total : ${this.state.total}</Container>
+                            <Container textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Container>
+                            <Divider horizontal></Divider>
+                            <Button fluid color = "blue" onClick = {this.handlePayment}>
+                                Pay Now
+                            </Button> 
+                        </Segment>
+                    </Grid.Column>
+                </Grid>
+            </>);
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 
