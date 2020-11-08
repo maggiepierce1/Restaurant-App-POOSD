@@ -47,7 +47,7 @@ class Login extends React.Component
             <input type = "text" ref = {this.username} placeholder = 'E-mail Address'/>
             </Form.Field>
             <Form.Field>
-            <input type = "text" ref = {this.password} placeholder = 'Password'/>
+            <input type = "password" ref = {this.password} placeholder = 'Password'/>
             </Form.Field>
             <Segment.Inline>
               <Button color = 'blue' onClick = {this.loginAsCustomer}>
