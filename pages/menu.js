@@ -43,7 +43,7 @@ function MenuPage({ menuItems })
                         {
                             return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
                                 <Popup
-                                trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
+                                trigger={<div className = "alignButtonRight"><Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/></div>}
                                 content = "Click here to add this item to your cart"
                                 basic/>
                             </Menu.Item>);
@@ -60,7 +60,7 @@ function MenuPage({ menuItems })
                         {
                             return (<Menu.Item>{menuItem.name}. . .{menuItem.price}
                                 <Popup
-                                trigger={<Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/>}
+                                trigger={<div className = "alignButtonRight"><Button value = {menuItem.name} icon='add' compact onClick = {handleClick}/></div>}
                                 content = "Click here to add this item to your cart"
                                 basic/>
                             </Menu.Item>);

@@ -42,7 +42,13 @@ function OrderPage({ orders })
                               basic/>
                               <Modal open = {mOpen} closeIcon onClose = {closeModal}>
                                  <Modal.Content>
-                                   <Header>Update the status of this order:</Header>
+                                   <Header>View and update the status of this order:</Header>
+                                   <List>
+                                      {order.items.map((item) => 
+                                      {
+                                        return (<List.Item>{item.name}. . .{item.price}</List.Item>);
+                                      })}
+                                   </List>
                                    <Button value = {"received"} onClick = {updateOrderStatus}>Received</Button>
                                    <Button value = {"preparing"} onClick = {updateOrderStatus}>Preparing</Button>
                                    <Button value = {"done"} onClick = {updateOrderStatus}>Done</Button>
