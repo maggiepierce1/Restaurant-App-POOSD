@@ -1,4 +1,4 @@
-import { List, Header, Grid, Modal, Button, Menu, Popup } from 'semantic-ui-react'
+import { List, Header, Grid, Modal, Button, Menu, Popup, Container, Segment, Divider } from 'semantic-ui-react'
 import axios from 'axios'
 import React, { useState } from 'react';
 
@@ -26,29 +26,37 @@ function OrderPage({ orders })
       e.preventDefault();
     }
     return (<>
-        <Header size = "huge" color = "teal" textAlign = "center">
-            Current orders:
+        <Header size = "large" inverted as = 'h1' block size = "huge" color = "white" textAlign = "center">
+          Welcome!
         </Header>
-        <Grid divided textAlign = "center" verticalAlign = "middle">
+        <Divider horizontal></Divider>
+        <Grid columns = {3} divided textAlign = "center" verticalAlign = "middle">
           <Grid.Row>
             <Grid.Column>
+              <Header block>Current Orders</Header>
                 <Menu vertical fluid>
                     {orders.map((order) => 
                     {
-                      return (<Menu.Item>Order for {order.username}
-                              <Popup
-                              trigger={<Button value = {order.username} icon='add' compact onClick = {triggerOrderDetailsModal}/>}
-                              content = "Click here to view order details"
-                              basic/>
+                      return (<Menu.Item>
+                                <Grid>
+                                  <Grid.Column width = '8'><Container fluid text textAlign = 'left'>Order for {order.username}</Container></Grid.Column> 
+                                  <Popup
+                                  trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {order.username} icon = 'add' compact onClick = {triggerOrderDetailsModal}/></Container></Grid.Column>}
+                                  content = "Click here to view order details"
+                                  basic/>
+                                </Grid>
                               <Modal open = {mOpen} closeIcon onClose = {closeModal}>
                                  <Modal.Content>
-                                   <Header>View and update the status of this order:</Header>
-                                   <List>
+                                   <Header as = 'h1'>Order Contents:</Header>
+                                   <Segment>
                                       {order.items.map((item) => 
                                       {
-                                        return (<List.Item>{item.name}. . .{item.price}</List.Item>);
+                                        return (<Container textAlign = "left">{item.name}</Container>);
                                       })}
-                                   </List>
+                                   </Segment>
+                                   <Divider horizontal></Divider>
+                                   <Header as = 'h3'>Current Status: {order.status}</Header>
+                                   <Header as = 'h2'> Update the status of this order:</Header>
                                    <Button value = {"received"} onClick = {updateOrderStatus}>Received</Button>
                                    <Button value = {"preparing"} onClick = {updateOrderStatus}>Preparing</Button>
                                    <Button value = {"done"} onClick = {updateOrderStatus}>Done</Button>

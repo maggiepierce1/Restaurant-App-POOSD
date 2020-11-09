@@ -49,8 +49,8 @@ class Cart extends React.Component
                                 return (<Container textAlign = "left" fluid text>{cartItem.name} (${cartItem.price})</Container>);
                             })}
                             <Divider horizontal><Icon name = "star"></Icon></Divider>
-                            <Container textAlign = "left" fluid text>Total : ${this.state.total}</Container>
-                            <Container textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Container>
+                            <Header as = 'h3' textAlign = "left" fluid text>Total : ${this.state.total}</Header>
+                            <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
                             <Divider horizontal></Divider>
                             <Button fluid color = "blue" onClick = {this.handlePayment}>
                                 Pay Now
