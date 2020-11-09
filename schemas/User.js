@@ -26,7 +26,7 @@ const UserSchema = new mongoose.Schema({
 UserSchema.pre('save', function(next) {
     var user = this;
 
-    // if (!user.isModified('password')) return next();
+    if (!user.isModified('password')) return next();
 
     bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
         if (err) return next(err);
@@ -43,17 +43,12 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb) 
+UserSchema.methods.comparePassword = function(candidatePassword) 
 {
-    bcrypt.compare(candidatePassword, this.password, 
-        function(err, isMatch) 
-        {
-            if (err) 
-                return cb(err);
-            cb(null, isMatch);
-        });
+    console.log("whaddup");
+    return bcrypt.compareSync(candidatePassword, this.password);
 };
 
-UserSchema.plugin(require('mongoose-bcrypt'));
+// UserSchema.plugin(require('mongoose-bcrypt'));
 
 export default mongoose.models.User || mongoose.model('User', UserSchema);

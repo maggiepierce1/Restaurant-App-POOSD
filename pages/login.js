@@ -2,6 +2,7 @@ import { Form, Container, Header, Grid, Segment, Button } from 'semantic-ui-reac
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
 import Router from 'next/router'
+import axios from 'axios'
 
 class Login extends React.Component
 {
@@ -14,35 +15,46 @@ class Login extends React.Component
     this.password = React.createRef();
   }
 
-  loginAsCustomer(event)
+  async loginAsCustomer(event)
   {
-    if (!validateUserCredentials(this.username.current.value, this.password.current.value))
+    // localStorage.setItem('valid', false);
+    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value);
+    alert(isValid);
+    if (isValid == false)
     {
       alert("Invalid username or password. Please try again.");
     }
-    Router.push('/customerhome');
+    else
+    {
+      Router.push('/customerhome');
+    }
     event.preventDefault();
   }
-  loginAsEmployee(event)
+  async loginAsEmployee(event)
   {
-    if (!validateUserCredentials(this.username.current.value, this.password.current.value))
+    validateUserCredentials(this.username.current.value, this.password.current.value);
+    const isValid = localStorage.getItem('valid');
+    if (isValid == "false")
     {
       alert("Invalid username or password. Please try again.");
     }
-    Router.push('/employeehome');
+    else
+    {
+      Router.push('/employeehome');
+    }
     event.preventDefault();
   }
 
   render() 
   {
     return (<>
-    <Grid style={{ height: '100vh' }} textAlign = "center" verticalAlign = "middle">
+    <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
       <Grid.Column style={{ maxWidth: 450 }}>
         <Header as = "h2" size = "large" textAlign = "center">
             Log in to your account:
         </Header>
         <Form size = 'large'>
-          <Segment stacked>
+          <Segment size = 'massive' stacked>
             <Form.Field>
             <input type = "text" ref = {this.username} placeholder = 'E-mail Address'/>
             </Form.Field>
@@ -67,8 +79,11 @@ class Login extends React.Component
 
 export async function validateUserCredentials(username, password)
 {
+  const url = "http://localhost:3000/api/validateuser"
+  const response = await axios.post(url, { username, password });
+  const user = response.data;
   localStorage.setItem('username', username);
-  return true;
+  return response.data;
 }
 
 export default Login;
