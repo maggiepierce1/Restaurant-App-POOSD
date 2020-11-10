@@ -1,9 +1,20 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Container, Input, Icon } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Container, Input, Icon, Form, Segment } from 'semantic-ui-react'
 import axios from 'axios'
 import Link from 'next/link'
+import React, { useState, useRef, useEffect } from 'react';
 
 function MenuPage({ menuItems })
 {
+    const [mOpen, setOpen] = useState(false);
+    const searchQuery = useRef("maggie");
+
+    function triggerSearchResultsModal(e)
+    {
+        setOpen(true);
+        alert(searchQuery.current.value);
+        loadSearchResults(searchQuery.current.value);
+        e.preventDefault();
+    }
     function handleClick(e)
     {
         alert(e.currentTarget.value);
@@ -12,17 +23,20 @@ function MenuPage({ menuItems })
         e.preventDefault();
     }
     return (<>
-        <Header size = "large" inverted as = 'h1' block size = "huge" color = "white" textAlign = "center">
+        <Header size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
             <Grid columns = {3}>
                 <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "large"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
-                <Grid.Column verticalAlign = "center">Menu</Grid.Column>
+                <Grid.Column verticalAlign = "middle">Menu</Grid.Column>
                 <Grid.Column textAlign = "right"><Link href = '/cart'><Button size = "large">Check Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
             </Grid>
         </Header>
         <Grid columns={3} divided textAlign = "center" verticalAlign = "middle">
           <Grid.Column>
             <Grid.Row>
-                <Input fluid action = "Search" type = "text" placeholder = "Search..."></Input>
+                <Segment><Segment.Inline>
+                    <Form><Form.Field><input ref = {searchQuery} type = "text" placeholder = "Search..."/></Form.Field></Form>
+                    <Button onClick = {triggerSearchResultsModal}>Search</Button>
+                </Segment.Inline></Segment>
             </Grid.Row>
             <Divider horizontal></Divider>
             <Grid.Row>
@@ -100,6 +114,11 @@ export async function getStaticProps()
   return {props : { menuItems } };
 }
 
+export async function loadSearchResults(searchQuery)
+{
+    const url = "http://localhost:3000/api/getSearchResults"
+    const response = await axios.get(url, { searchQuery });
+}
 
 export async function addToCart(itemName, userName)
 {
