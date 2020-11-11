@@ -1,5 +1,6 @@
 import connectToDatabase from "../../utils/connectToDatabase"
 import Order from "../../schemas/Order";
+import Cart from "../../schemas/Cart";
 
 connectToDatabase();
 
@@ -32,6 +33,20 @@ export default async (req, res) =>
 
     var newOrder = new Order({username : name, status : "received", items : cartItems, date : todaysDate, time: currentTime});
     newOrder.save();
+
+    // Let's wipe the cart clean
+    const newItems = [];
+    Cart.updateOne({username : name}, { $set: { items : newItems }},  function (error, success) 
+    {
+        if (error) 
+        {
+            // console.log(error);
+        } 
+        else 
+        {
+            // console.log(success);
+        }
+    });
 
     res.statusCode = 200;
     res.json({name : 'maggie'});

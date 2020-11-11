@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message } from 'semantic-ui-react'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -14,11 +14,14 @@ class Cart extends React.Component
         this.state = {totalWithTax : 0.00};
         this.state = {username : ""};
         this.state = {hasCartItems : false};
+        this.state = {disabled : false};
     }
     async componentDidMount()
     {
         const name = localStorage.getItem('username');
         const items = await loadCartItems(name);
+        if (items == "")
+            this.setState({disabled: true})
         const finalTotal = getOrderTotal(items);
         const finalTotalWithTax = getOrderTotalWithTax(finalTotal);
         this.setState({username : name});
@@ -48,20 +51,21 @@ class Cart extends React.Component
                 <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
                     <Grid.Column style={{ maxWidth: 650 }}>
                         <Header block inverted size = "huge" color = "grey" textAlign = "center">
-                            Items in your cart:
+                            Your Cart
                         </Header>
                         <Segment size = "massive" stacked>                  
                             {this.state.data  && this.state.data.map(function (cartItem)
                             {
                                 return (<Container textAlign = "left" fluid text>{cartItem.name} (${cartItem.price})</Container>);
                             })}
+                            <Message hidden = {this.state.disabled == false}>You have not added any items to your cart.</Message>
                             <Divider horizontal><Icon name = "star"></Icon></Divider>
                             <Segment color = 'grey' inverted>
                                 <Header as = 'h3' textAlign = "left" fluid text>Total : ${this.state.total}</Header>
                                 <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
                             </Segment>
                             <Divider horizontal></Divider>
-                            <Button fluid color = "blue" onClick = {this.handlePayment}>
+                            <Button size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
                                 Pay Now
                             </Button> 
                         </Segment>
