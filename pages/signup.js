@@ -1,23 +1,24 @@
-import { Form, Container, Header } from 'semantic-ui-react'
+import { Form, Container, Header, Grid, Segment, Button } from 'semantic-ui-react'
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
+import Router from 'next/router'
 
 class Signup extends React.Component
 {
   constructor(props)
   {
     super(props);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.setAccountMode = this.setAccountMode.bind(this);
+    this.signup = this.signup.bind(this);
     this.username = React.createRef();
     this.password = React.createRef();
     this.state = {mode : "none"};
   }
 
-  handleSubmit(event)
+  signup(event)
   {
-    createAccount(this.username.current.value, this.password.current.value, this.state.mode);
+    createAccount(this.username.current.value, this.password.current.value, event.currentTarget.value);
+    Router.push('/login');
     event.preventDefault();
   }
 
@@ -31,28 +32,31 @@ class Signup extends React.Component
   render() 
   {
     return (<>
-    <Header textAlign = "center">
-        Log in to your account:
-    </Header>
-    <Container>
-        <Form onSubmit = {this.handleSubmit}>
-            <Form.Field>
-            <label>Username</label>
-            <input type = "text" ref = {this.username} placeholder = 'Username'/>
-            </Form.Field>
-            <Form.Field>
-            <label>Password</label>
-            <input type = "text" ref = {this.password} placeholder = 'Password'/>
-            </Form.Field>
-            <Form.Button value = {"customer"} onClick = {this.setAccountMode}>
-                Sign up as customer
-            </Form.Button>
-            <Form.Button value = {"employee"} onClick = {this.setAccountMode}> 
-                Sign up as employee
-            </Form.Button>
-        <input type = "submit"/>
+    <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
+      <Grid.Column style={{ maxWidth: 450 }}>
+        <Header as = "h2" size = "large" textAlign = "center">
+            Create an account:
+        </Header>
+        <Form size = 'large'>
+          <Segment size = 'massive' stacked>
+              <Form.Field>
+              <input type = "text" ref = {this.username} placeholder = 'E-mail Address'/>
+              </Form.Field>
+              <Form.Field>
+              <input type = "text" ref = {this.password} placeholder = 'Password'/>
+              </Form.Field>
+              <Segment.Inline>
+                <Button value = {"customer"} onClick = {this.signup}>
+                    Sign up as customer
+                </Button>
+                <Button value = {"employee"} onClick = {this.signup}> 
+                    Sign up as employee
+                </Button>
+              </Segment.Inline>
+          </Segment>
         </Form>
-    </Container>
+      </Grid.Column>
+  </Grid>
     </>);
   }
 }

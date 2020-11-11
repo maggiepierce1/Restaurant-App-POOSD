@@ -13,10 +13,8 @@ export default async (req, res) =>
 
     if (newUser)
     {
-        console.log("um, hello?");
         validUser = newUser.comparePassword(newPassword);
     }
-    console.log("password: " + newPassword + " valid: " + validUser);
     res.send(validUser);
 
 }

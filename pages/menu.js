@@ -37,12 +37,13 @@ function MenuPage({ menuItems })
                 <Grid.Column textAlign = "right"><Link href = '/cart'><Button size = "huge">Check Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
             </Grid>
         </Header>
-        <Grid columns={3} divided textAlign = "center" verticalAlign = "middle">
-          <Grid.Column>
+        <Grid style={{ height: '75vh' }} divided textAlign = "center" verticalAlign = "middle">
+          <Grid.Column style={{ maxWidth: 650 }}>
             <Grid.Row>
                 <Segment><Segment.Inline>
                     <Form><Form.Field><input ref = {searchQuery} type = "text" placeholder = "Search..."/></Form.Field></Form>
-                    <Button onClick = {triggerSearchResultsModal}>Search</Button>
+                    <Divider horizontal></Divider>
+                    <Button fluid onClick = {triggerSearchResultsModal}>Search</Button>
                 </Segment.Inline></Segment>
             </Grid.Row>
             <Divider horizontal></Divider>

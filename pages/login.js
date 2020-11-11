@@ -19,7 +19,6 @@ class Login extends React.Component
   {
     // localStorage.setItem('valid', false);
     const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value);
-    alert(isValid);
     if (isValid == false)
     {
       alert("Invalid username or password. Please try again.");
@@ -32,9 +31,8 @@ class Login extends React.Component
   }
   async loginAsEmployee(event)
   {
-    validateUserCredentials(this.username.current.value, this.password.current.value);
-    const isValid = localStorage.getItem('valid');
-    if (isValid == "false")
+    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value);
+    if (isValid == false)
     {
       alert("Invalid username or password. Please try again.");
     }
@@ -70,6 +68,7 @@ class Login extends React.Component
               </Button>
             </Segment.Inline>
           </Segment>
+          <Link href = '/signup'><Button size = 'huge' color = "teal" fluid>New to us? Create an account</Button></Link>
         </Form>
       </Grid.Column>
     </Grid>

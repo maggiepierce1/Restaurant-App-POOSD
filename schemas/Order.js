@@ -14,6 +14,14 @@ const OrderSchema = new mongoose.Schema({
     status: {
         type: String,
         required: true
+    },
+    date: {
+        type: String,
+        required: false
+    },
+    time: {
+        type: String,
+        required: false
     }
 }, {collection: 'orders'});
 

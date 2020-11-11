@@ -38,9 +38,16 @@ class Cart extends React.Component
         if (this.state.hasCartItems)
         {
             return (<>
-                <Grid style={{ height: '100vh' }} textAlign = "center" verticalAlign = "middle">
-                    <Grid.Column style={{ maxWidth: 450 }}>
-                        <Header size = "huge" color = "teal" textAlign = "center">
+            <Header size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
+                <Grid columns = {3}>
+                    <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
+                    <Grid.Column verticalAlign = "middle">Check Out</Grid.Column>
+                    <Grid.Column textAlign = "right"><Link href = '/login'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                </Grid>
+            </Header>
+                <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
+                    <Grid.Column style={{ maxWidth: 650 }}>
+                        <Header block inverted size = "huge" color = "grey" textAlign = "center">
                             Items in your cart:
                         </Header>
                         <Segment size = "massive" stacked>                  
@@ -49,8 +56,10 @@ class Cart extends React.Component
                                 return (<Container textAlign = "left" fluid text>{cartItem.name} (${cartItem.price})</Container>);
                             })}
                             <Divider horizontal><Icon name = "star"></Icon></Divider>
-                            <Header as = 'h3' textAlign = "left" fluid text>Total : ${this.state.total}</Header>
-                            <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
+                            <Segment color = 'grey' inverted>
+                                <Header as = 'h3' textAlign = "left" fluid text>Total : ${this.state.total}</Header>
+                                <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
+                            </Segment>
                             <Divider horizontal></Divider>
                             <Button fluid color = "blue" onClick = {this.handlePayment}>
                                 Pay Now
@@ -88,7 +97,6 @@ export async function loadCartItems(username)
   const url = "http://localhost:3000/api/cart"
   const response = await axios.get(url, {params : {name : username}});
   const cartItems = response.data;
-  // alert(JSON.stringify(cartItems));
   return cartItems;
 }
 

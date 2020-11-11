@@ -1,13 +1,13 @@
 import connectToDatabase from "../../utils/connectToDatabase"
-import Cart from "../../schemas/Cart"
+import Order from "../../schemas/Order"
 
 connectToDatabase();
 
 export default async (req, res) => 
 {
     const name = req.query.name;
-    const cart = await Cart.findOne({username : name});
-    const cartItems = (!cart) ? "" : cart.items;
+    var orders = await Order.find({username : name});
+    orders = (!orders) ? "" : orders;
     res.statusCode = 200;
-    res.json(cartItems);
+    res.json(orders);
 }
