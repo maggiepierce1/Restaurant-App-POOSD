@@ -62,15 +62,20 @@ class EmployeeHome extends React.Component
                   <Menu vertical fluid>
                       {this.state.data && this.state.data.map((order, index) =>
                       {
-                        return (<Menu.Item>
-                                  <Grid>
-                                    <Grid.Column width = '8'><Container fluid text textAlign = 'left'>Order for {order.username}</Container></Grid.Column> 
-                                    <Popup
-                                    trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {index} icon = 'add' compact onClick = {this.triggerOrderDetailsModal}/></Container></Grid.Column>}
-                                    content = "Click here to view order details"
-                                    basic/>
-                                  </Grid>
-                              </Menu.Item>);
+                        if (order.status != "picked up")
+                        {
+                          return (<Menu.Item key = {index}>
+                                    <Grid>
+                                      <Grid.Column width = '8'><Header as = 'h4' textAlign = 'left'>Order for {order.username}</Header>
+                                      <Container fluid text textAlign = 'left'>placed on {order.date} at {order.time}</Container>
+                                      </Grid.Column> 
+                                      <Popup
+                                      trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button size = "huge" value = {index} icon = 'add' compact onClick = {this.triggerOrderDetailsModal}/></Container></Grid.Column>}
+                                      content = "Click here to view order details"
+                                      basic/>
+                                    </Grid>
+                                </Menu.Item>);
+                        }
                       })}
                   </Menu>
               </Grid.Column>

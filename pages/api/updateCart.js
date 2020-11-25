@@ -1,5 +1,4 @@
 import connectToDatabase from "../../utils/connectToDatabase"
-import MenuItem from "../../schemas/MenuItem"
 import Cart from "../../schemas/Cart";
 
 connectToDatabase();

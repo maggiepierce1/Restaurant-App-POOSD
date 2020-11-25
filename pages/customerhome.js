@@ -1,4 +1,4 @@
-import { Button, Grid, Header, Divider } from 'semantic-ui-react'
+import { Button, Grid, Header, Divider, Icon, Image, Card } from 'semantic-ui-react'
 import Link from 'next/link'
 
 class CustomerHome extends React.Component
@@ -20,32 +20,73 @@ class CustomerHome extends React.Component
         if (this.state.readyToRender)
         {
             return (<>
-            <Header textAlign = "center" block color = "white" inverted size = "huge">Welcome, {this.state.username}!</Header>
+            <Header style={{ backgroundColor: '#393433' }} size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
+                <Grid columns = {3}>
+                    <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
+                    <Grid.Column verticalAlign = "middle">Welcome!</Grid.Column>
+                    <Grid.Column textAlign = "right"><Link href = '/login'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                </Grid>
+            </Header>
             <Divider horizontal></Divider>
-            <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
-                <Grid.Column>
-                    <Grid.Row> 
-                        <Link href = "/menu">
-                            <Button size = "massive">
-                                View menu
-                            </Button>
-                        </Link>
-                    </Grid.Row>
-                    <Divider horizontal></Divider>
+            <Grid style={{ height: '75vh'}} textAlign = "center" verticalAlign = "middle">
+                <Grid.Column width = '3'>
                     <Grid.Row>
-                        <Link href = "/cart">
-                            <Button size = "massive">
-                                Check Out
-                            </Button>
-                        </Link>
+                        <Card>
+                        <Image src = 'https://images.unsplash.com/photo-1561043433-9265f73e685f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80' wrapped ui={false} />
+                            <Card.Content>
+                                <Card.Header textAlign = 'center'>Hungry?</Card.Header>
+                                <Card.Description>
+                                    Check out all we have to offer. 
+                                </Card.Description>
+                                </Card.Content>
+                                <Card.Content extra>
+                                    <Link href = "/menu">
+                                        <Button inverted style={{ backgroundColor: '#c95b0c' }} fluid>
+                                            View menu<Icon name = "arrow alternate circle right"></Icon>
+                                        </Button>
+                                    </Link>
+                            </Card.Content>
+                        </Card>
                     </Grid.Row>
-                    <Divider horizontal></Divider>
+                </Grid.Column>.
+                <Grid.Column width = '3'>
                     <Grid.Row>
-                        <Link href = "/orderstatus">
-                            <Button size = "massive">
-                                View Order Status
-                            </Button>
-                        </Link>
+                        <Card>
+                            <Image src = 'https://images.unsplash.com/photo-1585238342024-78d387f4a707?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80' wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header textAlign = 'center'>Ready to checkout?</Card.Header>
+                                    <Card.Description>
+                                        We'll have it ready in no time.  
+                                    </Card.Description>
+                                    </Card.Content>
+                                    <Card.Content extra>
+                                        <Link href = "/cart">
+                                            <Button inverted style={{ backgroundColor: '#c95b0c' }} fluid>
+                                                Check Out<Icon name = "arrow alternate circle right"></Icon>
+                                            </Button>
+                                        </Link>
+                                </Card.Content>
+                            </Card>
+                    </Grid.Row>
+                </Grid.Column>
+                <Grid.Column width = '3'>
+                    <Grid.Row>
+                        <Card>
+                            <Image src = 'https://images.unsplash.com/photo-1597933856545-b9ee519aa0ec?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80' wrapped ui={false} />
+                                <Card.Content>
+                                    <Card.Header textAlign = 'center'>Already Ordered?</Card.Header>
+                                    <Card.Description>
+                                        Find out when it'll be ready. 
+                                    </Card.Description>
+                                    </Card.Content>
+                                    <Card.Content extra>
+                                        <Link href = "/orderstatus">
+                                            <Button inverted style={{ backgroundColor: '#c95b0c' }} fluid>
+                                                View Order Status<Icon name = "arrow alternate circle right"></Icon>
+                                            </Button>
+                                        </Link>
+                                </Card.Content>
+                            </Card>
                     </Grid.Row>
                 </Grid.Column>
             </Grid>

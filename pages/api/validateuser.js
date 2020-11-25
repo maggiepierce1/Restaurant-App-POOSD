@@ -15,6 +15,7 @@ export default async (req, res) =>
     {
         validUser = newUser.comparePassword(newPassword);
     }
+    res.statusCode = 200;
     res.send(validUser);
 
 }

@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image } from 'semantic-ui-react'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'
@@ -41,7 +41,7 @@ class Cart extends React.Component
         if (this.state.hasCartItems)
         {
             return (<>
-            <Header size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
+            <Header style={{ backgroundColor: '#393433' }} size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
                 <Grid columns = {3}>
                     <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
                     <Grid.Column verticalAlign = "middle">Check Out</Grid.Column>
@@ -49,8 +49,11 @@ class Cart extends React.Component
                 </Grid>
             </Header>
                 <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
-                    <Grid.Column style={{ maxWidth: 650 }}>
-                        <Header block inverted size = "huge" color = "grey" textAlign = "center">
+                    <Grid.Column width = '3'>
+                        <Image rounded src = 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'/>
+                    </Grid.Column>
+                    <Grid.Column width = '6'>
+                        <Header style={{ backgroundColor: '#c95b0c' }} block inverted size = "huge" color = "grey" textAlign = "center">
                             Your Cart
                         </Header>
                         <Segment size = "massive" stacked>                  
@@ -60,15 +63,18 @@ class Cart extends React.Component
                             })}
                             <Message hidden = {this.state.disabled == false}>You have not added any items to your cart.</Message>
                             <Divider horizontal><Icon name = "star"></Icon></Divider>
-                            <Segment color = 'grey' inverted>
+                            <Segment style={{ backgroundColor: '#393433' }} inverted>
                                 <Header as = 'h3' textAlign = "left" fluid text>Total : ${this.state.total}</Header>
                                 <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
                             </Segment>
                             <Divider horizontal></Divider>
-                            <Button size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
+                            <Button style={{ backgroundColor: '#393433' }} size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
                                 Pay Now
                             </Button> 
                         </Segment>
+                    </Grid.Column>
+                    <Grid.Column width = '3'>
+                        <Image rounded src = 'https://images.unsplash.com/photo-1579856896394-07dfa10d7c5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80'/>
                     </Grid.Column>
                 </Grid>
             </>);
