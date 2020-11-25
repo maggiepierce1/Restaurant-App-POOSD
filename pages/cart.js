@@ -1,4 +1,5 @@
 import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import Link from 'next/link'
 import Router from 'next/router'

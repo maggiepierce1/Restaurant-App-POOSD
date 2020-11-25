@@ -1,4 +1,5 @@
 import { Button, Grid, Header, Divider, Icon, Image, Card } from 'semantic-ui-react'
+import 'semantic-ui-css/semantic.min.css'
 import Link from 'next/link'
 
 class CustomerHome extends React.Component
