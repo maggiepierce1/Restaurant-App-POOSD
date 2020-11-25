@@ -104,7 +104,7 @@ export function getOrderTotalWithTax(total)
 
 export async function loadCartItems(username)
 {
-  const url = "http://localhost:3000/api/cart"
+  const url = "https://poosdrestaurantapp.vercel.app/api/cart"
   const response = await axios.get(url, {params : {name : username}});
   const cartItems = response.data;
   return cartItems;
@@ -112,7 +112,7 @@ export async function loadCartItems(username)
 
 export async function createOrder(username, items, total, totalWithTax)
 {
-    const url = "http://localhost:3000/api/createOrder"
+    const url = "https://poosdrestaurantapp.vercel.app/api/createOrder"
     const response = await axios.post(url, { username, items, total, totalWithTax });
 }
 export default Cart;

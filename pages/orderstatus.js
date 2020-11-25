@@ -63,7 +63,7 @@ class OrderStatus extends React.Component
 
 export async function loadOrders(username)
 {
-  const url = "http://localhost:3000/api/orderstatus"
+  const url = "https://poosdrestaurantapp.vercel.app/api/orderstatus"
   const response = await axios.get(url, {params : {name : username}});
   const orders = response.data;
   return orders;

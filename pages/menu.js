@@ -145,7 +145,7 @@ function MenuPage({ menuItems })
 
 export async function getServerSideProps()
 {
-  const url = "http://localhost:3000/api/menu"
+  const url = "https://poosdrestaurantapp.vercel.app/api/menu"
   const response = await axios.get(url);
   const menuItems = response.data;
   return {props : { menuItems } };
@@ -153,7 +153,7 @@ export async function getServerSideProps()
 
 export async function loadSearchResults(searchQuery)
 {
-    const url = "http://localhost:3000/api/getSearchResults"
+    const url = "https://poosdrestaurantapp.vercel.app/api/getSearchResults"
     const response = await axios.get(url, {params : {search : searchQuery}});
     const searchResults = response.data;
     return searchResults;
@@ -161,7 +161,7 @@ export async function loadSearchResults(searchQuery)
 
 export async function addToCart(itemName, userName)
 {
-    const url = "http://localhost:3000/api/updateCart"
+    const url = "https://poosdrestaurantapp.vercel.app/api/updateCart"
     const response = await axios.post(url, { itemName, userName });
 }
 

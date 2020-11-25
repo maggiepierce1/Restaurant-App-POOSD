@@ -79,7 +79,7 @@ class Login extends React.Component
 
 export async function validateUserCredentials(username, password)
 {
-  const url = "http://localhost:3000/api/validateuser"
+  const url = "https://poosdrestaurantapp.vercel.app/api/validateuser"
   const response = await axios.post(url, { username, password });
   const user = response.data;
   localStorage.setItem('username', username);
