@@ -52,7 +52,7 @@ class EmployeeHome extends React.Component
             <Grid columns = {3}>
                 <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
                 <Grid.Column verticalAlign = "middle">Welcome!</Grid.Column>
-                <Grid.Column textAlign = "right"><Link href = '/loginy'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                <Grid.Column textAlign = "right"><Link href = '/index'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
             </Grid>
         </Header>
           <Divider horizontal></Divider>
@@ -110,12 +110,14 @@ class EmployeeHome extends React.Component
 
 export async function updateStatus(id, newStatus)
 {
+    // const url = "http://localhost:3000/api/updateOrder"
     const url = "https://poosdrestaurantapp.vercel.app/updateOrder"
     const response = await axios.post(url, { id, newStatus });
 }
 
 export async function loadOrders()
 {
+  // const url = "http://localhost:3000/api/orders"
   const url = "https://poosdrestaurantapp.vercel.app/api/orders"
   const response = await axios.get(url);
   const orders = response.data;

@@ -28,7 +28,7 @@ class OrderStatus extends React.Component
                 <Grid columns = {3}>
                     <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
                     <Grid.Column style={{fontSize: '40px' }} verticalAlign = "middle">Order Status Page</Grid.Column>
-                    <Grid.Column textAlign = "right"><Link href = '/login'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                    <Grid.Column textAlign = "right"><Link href = '/'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
                 </Grid>
             </Header>
             <Grid style={{ height: '75vh' }} textAlign = "center">
@@ -64,6 +64,7 @@ class OrderStatus extends React.Component
 
 export async function loadOrders(username)
 {
+  // const url = "http://localhost:3000/api/orderstatus"
   const url = "https://poosdrestaurantapp.vercel.app/api/orderstatus"
   const response = await axios.get(url, {params : {name : username}});
   const orders = response.data;

@@ -22,6 +22,10 @@ const OrderSchema = new mongoose.Schema({
     time: {
         type: String,
         required: false
+    },
+    pickupName : {
+        type: String,
+        required: false
     }
 }, {collection: 'orders'});
 

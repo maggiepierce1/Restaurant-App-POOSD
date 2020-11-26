@@ -17,22 +17,20 @@ class Login extends React.Component
 
   async loginAsCustomer(event)
   {
-    // localStorage.setItem('valid', false);
-    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value);
+    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value, "customer");
     if (isValid == false)
     {
       alert("Invalid username or password. Please try again.");
     }
     else
     {
-      // const name = getUserName(this.username.current.value);
       Router.push('/customerhome');
     }
     event.preventDefault();
   }
   async loginAsEmployee(event)
   {
-    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value);
+    const isValid = await validateUserCredentials(this.username.current.value, this.password.current.value, "employee");
     if (isValid == false)
     {
       alert("Invalid username or password. Please try again.");
@@ -55,7 +53,7 @@ class Login extends React.Component
             <Header as = 'h2' style={{width: 200, color: '#FFFFFF', fontStyle: 'bold', fontSize: '50px', textAlign: 'center', display: 'inline-block'}}>Log In</Header>
             </Container>
             <Form.Field>
-            <input type = "text" ref = {this.username} placeholder = 'E-mail Address'/>
+            <input type = "email" ref = {this.username} placeholder = 'E-mail Address'/>
             </Form.Field>
             <Form.Field>
             <input type = "password" ref = {this.password} placeholder = 'Password'/>
@@ -77,22 +75,14 @@ class Login extends React.Component
   }
 }
 
-export async function validateUserCredentials(username, password)
+export async function validateUserCredentials(username, password, mode)
 {
-  const url = "https://poosdrestaurantapp.vercel.app/api/validateuser"
-  const response = await axios.post(url, { username, password });
+  const url = "http://localhost:3000/api/validateuser"
+  // const url = "https://poosdrestaurantapp.vercel.app/api/validateuser"
+  const response = await axios.post(url, { username, password, mode });
   const user = response.data;
   localStorage.setItem('username', username);
   return response.data;
 }
-/*
-export async function getUserName(username)
-{
-  const url = "http://localhost:3000/api/getName"
-  const response = await axios.get(url, {params : {name : username}});
-  localStorage.setItem('username', response.data);
-  return response.data;
-}
-*/
 
 export default Login;

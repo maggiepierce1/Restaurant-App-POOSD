@@ -115,6 +115,27 @@ function MenuPage({ menuItems })
                     })}
                 </Menu>
             </Grid.Row>
+            <Divider horizontal></Divider>
+            <Grid.Row>
+                <Header inverted style={{ backgroundColor: '#c95b0c' }} as = 'h2' block>Drinks</Header>
+                <Menu vertical fluid>
+                    {menuItems.map((menuItem) => 
+                    {
+                        if (menuItem.category == "drink")
+                        {
+                            return (<Menu.Item key = {menuItem}>
+                                <Grid>        
+                                    <Grid.Column width = '8'><Container fluid text textAlign = 'left'>{menuItem.name}  (${menuItem.price})</Container></Grid.Column>
+                                    <Popup
+                                    trigger={<Grid.Column width = '8'><Container textAlign = 'right'><Button inverted style={{ backgroundColor: '#393433' }} size = "huge" value = {menuItem.name} icon = 'cart' compact onClick = {handleClick}/></Container></Grid.Column>}
+                                    content = "Click here to add this item to your cart"
+                                    basic/>      
+                                </Grid>
+                            </Menu.Item>);
+                        }
+                    })}
+                </Menu>
+            </Grid.Row>
           </Grid.Column>
           <Grid.Column width = '3'>
                 <Image src = 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=714&q=80'/>
@@ -146,6 +167,7 @@ function MenuPage({ menuItems })
 
 export async function getServerSideProps()
 {
+  // const url = "http://localhost:3000/api/menu"
   const url = "https://poosdrestaurantapp.vercel.app/api/menu"
   const response = await axios.get(url);
   const menuItems = response.data;
@@ -154,6 +176,7 @@ export async function getServerSideProps()
 
 export async function loadSearchResults(searchQuery)
 {
+    // const url = "http://localhost:3000/api/getSearchResults"
     const url = "https://poosdrestaurantapp.vercel.app/api/getSearchResults"
     const response = await axios.get(url, {params : {search : searchQuery}});
     const searchResults = response.data;
@@ -162,7 +185,8 @@ export async function loadSearchResults(searchQuery)
 
 export async function addToCart(itemName, userName)
 {
-    const url = "https://poosdrestaurantapp.vercel.app/api/updateCart"
+    const url = "http://localhost:3000/api/updateCart"
+    // const url = "https://poosdrestaurantapp.vercel.app/api/updateCart"
     const response = await axios.post(url, { itemName, userName });
 }
 

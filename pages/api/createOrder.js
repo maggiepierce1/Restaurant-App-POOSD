@@ -10,6 +10,7 @@ export default async (req, res) =>
     const cartItems = req.body.items;
     const total = req.body.total;
     const totalWithTax = req.body.totalWithTax;
+    //const orderName = req.body.orderName;
     const d = new Date();
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
@@ -27,7 +28,7 @@ export default async (req, res) =>
     if (minute < 10)
         minute = "0" + minute;
 
-    const todaysDate = day + "-" + month + "-" + year;
+    const todaysDate = month + "-" + day + "-" + year;
     const currentTime = hour + ":" + minute + " " + AMorPM;
 
 

@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image, Input } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import Link from 'next/link'
@@ -16,13 +16,14 @@ class Cart extends React.Component
         this.state = {username : ""};
         this.state = {hasCartItems : false};
         this.state = {disabled : false};
+        this.orderName = React.createRef();
     }
     async componentDidMount()
     {
         const name = localStorage.getItem('username');
         const items = await loadCartItems(name);
         if (items == "")
-            this.setState({disabled: true})
+            this.setState({disabled : true});
         const finalTotal = getOrderTotal(items);
         const finalTotalWithTax = getOrderTotalWithTax(finalTotal);
         this.setState({username : name});
@@ -33,7 +34,7 @@ class Cart extends React.Component
     }
     handlePayment(e)
     {
-        createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax);
+        createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax, this.orderName);
         Router.push('/orderstatus');
         e.preventDefault();
     }
@@ -46,7 +47,7 @@ class Cart extends React.Component
                 <Grid columns = {3}>
                     <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
                     <Grid.Column verticalAlign = "middle">Check Out</Grid.Column>
-                    <Grid.Column textAlign = "right"><Link href = '/login'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                    <Grid.Column textAlign = "right"><Link href = '/'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
                 </Grid>
             </Header>
                 <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
@@ -69,6 +70,7 @@ class Cart extends React.Component
                                 <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
                             </Segment>
                             <Divider horizontal></Divider>
+                            <input type = "text" ref = {this.orderName} placeholder = 'Enter name'/>
                             <Button style={{ backgroundColor: '#393433' }} size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
                                 Pay Now
                             </Button> 
@@ -105,14 +107,16 @@ export function getOrderTotalWithTax(total)
 
 export async function loadCartItems(username)
 {
+  // const url = "http://localhost:3000/api/cart"
   const url = "https://poosdrestaurantapp.vercel.app/api/cart"
   const response = await axios.get(url, {params : {name : username}});
   const cartItems = response.data;
   return cartItems;
 }
 
-export async function createOrder(username, items, total, totalWithTax)
+export async function createOrder(username, items, total, totalWithTax, orderName)
 {
+    // const url = "http://localhost:3000/api/createOrder"
     const url = "https://poosdrestaurantapp.vercel.app/api/createOrder"
     const response = await axios.post(url, { username, items, total, totalWithTax });
 }
