@@ -1,4 +1,4 @@
-import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image, Input } from 'semantic-ui-react'
+import { Header, Grid, Menu, Popup, Button, Divider, MenuItem, Segment, Container, Icon, Message, Image, Input, Form } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import Link from 'next/link'
@@ -16,6 +16,7 @@ class Cart extends React.Component
         this.state = {username : ""};
         this.state = {hasCartItems : false};
         this.state = {disabled : false};
+        this.state = {noName : false};
         this.orderName = React.createRef();
     }
     async componentDidMount()
@@ -24,6 +25,8 @@ class Cart extends React.Component
         const items = await loadCartItems(name);
         if (items == "")
             this.setState({disabled : true});
+        else
+            this.setState({disabled : false});
         const finalTotal = getOrderTotal(items);
         const finalTotalWithTax = getOrderTotalWithTax(finalTotal);
         this.setState({username : name});
@@ -34,8 +37,16 @@ class Cart extends React.Component
     }
     handlePayment(e)
     {
-        createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax, this.orderName);
-        Router.push('/orderstatus');
+        if (this.orderName.current.value == "")
+        {
+            this.setState({noName : true});
+        }
+        else 
+        {
+            this.setState({noName : false});
+            createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax, this.orderName.current.value);
+            Router.push('/orderstatus');
+        }
         e.preventDefault();
     }
     render()
@@ -70,7 +81,10 @@ class Cart extends React.Component
                                 <Header as = 'h3' textAlign = "left" fluid text>Total with tax added : ${this.state.totalWithTax}</Header>
                             </Segment>
                             <Divider horizontal></Divider>
-                            <input type = "text" ref = {this.orderName} placeholder = 'Enter name'/>
+                            <Header as = 'h3' textAlign = 'left'>Who's picking up this order?</Header>
+                            <Form><Form.Field><input type = "text" ref = {this.orderName} placeholder = 'Enter name'/></Form.Field></Form>
+                            <Divider horizontal></Divider>
+                            <Message size = 'small' error hidden = {this.state.noName == false}>Please enter a name for pickup.</Message>
                             <Button style={{ backgroundColor: '#393433' }} size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
                                 Pay Now
                             </Button> 
@@ -118,6 +132,6 @@ export async function createOrder(username, items, total, totalWithTax, orderNam
 {
     // const url = "http://localhost:3000/api/createOrder"
     const url = "https://poosdrestaurantapp.vercel.app/api/createOrder"
-    const response = await axios.post(url, { username, items, total, totalWithTax });
+    const response = await axios.post(url, { username, items, total, totalWithTax, orderName });
 }
 export default Cart;

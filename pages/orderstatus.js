@@ -42,7 +42,7 @@ class OrderStatus extends React.Component
                             {
                                 return (<Menu.Item key = {index}>
                                         <Grid>
-                                            <Grid.Column><Header as = 'h2' textAlign = "left">Order #{index + 1} for {order.username}</Header>
+                                            <Grid.Column><Header as = 'h2' textAlign = "left">Order #{index + 1} for {order.pickupName}</Header>
                                             <Header as = 'h3' textAlign = "left">placed at {order.time} on {order.date}</Header>
                                             <Segment style={{ backgroundColor: '#393433' }} inverted><Header as = 'h3' textAlign = "left">Status: {order.status}</Header></Segment>
                                             </Grid.Column> 

@@ -52,7 +52,7 @@ class EmployeeHome extends React.Component
             <Grid columns = {3}>
                 <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
                 <Grid.Column verticalAlign = "middle">Welcome!</Grid.Column>
-                <Grid.Column textAlign = "right"><Link href = '/index'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
+                <Grid.Column textAlign = "right"><Link href = '/'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
             </Grid>
         </Header>
           <Divider horizontal></Divider>
@@ -67,7 +67,7 @@ class EmployeeHome extends React.Component
                         {
                           return (<Menu.Item key = {index}>
                                     <Grid>
-                                      <Grid.Column width = '8'><Header as = 'h4' textAlign = 'left'>Order for {order.username}</Header>
+                                      <Grid.Column width = '8'><Header as = 'h4' textAlign = 'left'>Order for {order.pickupName}</Header>
                                       <Container fluid text textAlign = 'left'>placed on {order.date} at {order.time}</Container>
                                       </Grid.Column> 
                                       <Popup

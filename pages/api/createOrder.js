@@ -10,7 +10,7 @@ export default async (req, res) =>
     const cartItems = req.body.items;
     const total = req.body.total;
     const totalWithTax = req.body.totalWithTax;
-    //const orderName = req.body.orderName;
+    const orderName = req.body.orderName;
     const d = new Date();
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
@@ -32,7 +32,7 @@ export default async (req, res) =>
     const currentTime = hour + ":" + minute + " " + AMorPM;
 
 
-    var newOrder = new Order({username : name, status : "received", items : cartItems, date : todaysDate, time: currentTime});
+    var newOrder = new Order({username : name, status : "received", items : cartItems, date : todaysDate, time: currentTime, pickupName: orderName});
     newOrder.save();
 
     // Let's wipe the cart clean

@@ -185,8 +185,8 @@ export async function loadSearchResults(searchQuery)
 
 export async function addToCart(itemName, userName)
 {
-    const url = "http://localhost:3000/api/updateCart"
-    // const url = "https://poosdrestaurantapp.vercel.app/api/updateCart"
+    // const url = "http://localhost:3000/api/updateCart"
+    const url = "https://poosdrestaurantapp.vercel.app/api/updateCart"
     const response = await axios.post(url, { itemName, userName });
 }
 
