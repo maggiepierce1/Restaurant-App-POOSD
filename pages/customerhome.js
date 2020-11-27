@@ -24,7 +24,7 @@ class CustomerHome extends React.Component
             <Header style={{ backgroundColor: '#393433' }} size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
                 <Grid columns = {3}>
                     <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
-                    <Grid.Column verticalAlign = "middle">Welcome!</Grid.Column>
+                    <Grid.Column style={{ fontSize: '40px' }} verticalAlign = "middle">Welcome!</Grid.Column>
                     <Grid.Column textAlign = "right"><Link href = '/'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
                 </Grid>
             </Header>

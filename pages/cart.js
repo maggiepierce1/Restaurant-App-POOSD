@@ -62,9 +62,8 @@ class Cart extends React.Component
                 </Grid>
             </Header>
                 <Grid style={{ height: '75vh' }} textAlign = "center" verticalAlign = "middle">
-                    <Grid.Column width = '3'>
-                        <Image rounded src = 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80'/>
-                    </Grid.Column>
+                    <Grid.Column width = '5'>
+                        <Image style={{ width: 500, height: 600}} verticalAlign = 'top' centered rounded src = 'images/cartimage.jpg'/></Grid.Column>
                     <Grid.Column width = '6'>
                         <Header style={{ backgroundColor: '#c95b0c' }} block inverted size = "huge" color = "grey" textAlign = "center">
                             Your Cart
@@ -84,14 +83,11 @@ class Cart extends React.Component
                             <Header as = 'h3' textAlign = 'left'>Who's picking up this order?</Header>
                             <Form><Form.Field><input type = "text" ref = {this.orderName} placeholder = 'Enter name'/></Form.Field></Form>
                             <Divider horizontal></Divider>
-                            <Message size = 'small' error hidden = {this.state.noName == false}>Please enter a name for pickup.</Message>
+                            <Message style={{ fontSize: '15px' }} error hidden = {this.state.noName == false}>Please enter a name for pickup.</Message>
                             <Button style={{ backgroundColor: '#393433' }} size = 'large' disabled = {this.state.disabled} fluid color = "grey" onClick = {this.handlePayment}>
                                 Pay Now
                             </Button> 
                         </Segment>
-                    </Grid.Column>
-                    <Grid.Column width = '3'>
-                        <Image rounded src = 'https://images.unsplash.com/photo-1579856896394-07dfa10d7c5b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80'/>
                     </Grid.Column>
                 </Grid>
             </>);

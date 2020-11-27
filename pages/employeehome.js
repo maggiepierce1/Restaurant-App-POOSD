@@ -1,4 +1,4 @@
-import { List, Header, Grid, Modal, Button, Menu, Popup, Container, Segment, Divider, Icon } from 'semantic-ui-react'
+import { List, Header, Grid, Modal, Button, Menu, Popup, Container, Segment, Divider, Icon, Message } from 'semantic-ui-react'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
 import Link from 'next/link'
@@ -15,10 +15,13 @@ class EmployeeHome extends React.Component
         this.state = {mOpen : false};
         this.state = {hasOrders : false};
         this.state = {currIndex : 0};
+        this.state = {noOrders : false};
     }
     async componentDidMount()
     {
         const currOrders = await loadOrders();
+        if (currOrders == "")
+          this.setState({noOrders : true});
         this.setState({data : currOrders});
         this.setState({hasOrders : true});
     }
@@ -48,18 +51,20 @@ class EmployeeHome extends React.Component
       if (this.state.hasOrders)
       {
         return (<>
-          <Header size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
+          <Header style={{ backgroundColor: '#393433' }} size = "large" inverted as = 'h1' block size = "huge" color = "grey" textAlign = "center">
             <Grid columns = {3}>
                 <Grid.Column textAlign = "left"><Link href = '/customerhome'><Button size = "huge"><Icon name = "arrow alternate circle left"></Icon>Back</Button></Link></Grid.Column>
-                <Grid.Column verticalAlign = "middle">Welcome!</Grid.Column>
+                <Grid.Column  style={{ fontSize: '40px' }} verticalAlign = "middle">Welcome!</Grid.Column>
                 <Grid.Column textAlign = "right"><Link href = '/'><Button size = "huge">Log Out<Icon name = "arrow alternate circle right"></Icon></Button></Link></Grid.Column>
             </Grid>
         </Header>
           <Divider horizontal></Divider>
           <Grid columns = {3} divided textAlign = "center" verticalAlign = "middle">
             <Grid.Row>
-              <Grid.Column>
-                <Header as = 'h2' block>Current Orders</Header>
+              <Grid.Column width = '10'>
+                <Header inverted style={{ backgroundColor: '#c95b0c' }} as = 'h2' block>Current Orders</Header>
+                <Message hidden = {this.state.noOrders == false}>There are no orders currently in progress.</Message>
+                <Message style={{ fontStyle: 'italic', fontSize: '16px' }}>Select the '+' button to view the details of an order and update its status.</Message>
                   <Menu vertical fluid>
                       {this.state.data && this.state.data.map((order, index) =>
                       {
@@ -93,6 +98,8 @@ class EmployeeHome extends React.Component
               </Segment>
               <Divider horizontal></Divider>
               <Header as = 'h3'>Current Status: {this.state.data[this.state.currIndex].status}</Header>
+              <Divider horizontal></Divider>
+              <Header as = 'h3'>Update status:</Header>
               <Button value = {"received"} onClick = {this.updateOrderStatus}>Received</Button>
               <Button value = {"preparing"} onClick = {this.updateOrderStatus}>Preparing</Button>
               <Button value = {"done"} onClick = {this.updateOrderStatus}>Done</Button>
@@ -110,9 +117,9 @@ class EmployeeHome extends React.Component
 
 export async function updateStatus(id, newStatus)
 {
-    // const url = "http://localhost:3000/api/updateOrder"
-    const url = "https://poosdrestaurantapp.vercel.app/updateOrder"
-    const response = await axios.post(url, { id, newStatus });
+  // const url = "http://localhost:3000/api/updateOrder"
+  const url = "https://poosdrestaurantapp.vercel.app/updateOrder"
+  const response = await axios.post(url, { id, newStatus });
 }
 
 export async function loadOrders()

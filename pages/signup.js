@@ -1,4 +1,4 @@
-import { Form, Container, Header, Grid, Segment, Button } from 'semantic-ui-react'
+import { Form, Container, Header, Grid, Segment, Button, Message } from 'semantic-ui-react'
 import Link from 'next/link'
 import 'semantic-ui-css/semantic.min.css'
 import axios from 'axios'
@@ -13,6 +13,10 @@ class Signup extends React.Component
     this.username = React.createRef();
     this.password = React.createRef();
     this.state = {mode : "none"};
+    this.state = {signupError : false};
+    this.state = {newEmail : false};
+    this.state = {noEmail : false};
+    this.state = {badInput : false};
   }
 
   async signup(event)
@@ -34,10 +38,15 @@ class Signup extends React.Component
       successfulSignup = await createAccount(this.username.current.value, this.password.current.value, event.currentTarget.value);
     }
 
-    if (successfulSignup)
-      Router.push('/login');
+    if (successfulSignup == true)
+    {
+      this.setState({signupError : false});
+      Router.push('/');
+    }
     else
-      alert("There is already an account associated with this e-mail address. Please try again, or return to login.");
+    {
+      this.setState({signupError : true});
+    }
     
     event.preventDefault();
   }
@@ -54,7 +63,7 @@ class Signup extends React.Component
     return (<>
       <Grid stretched style={{ height: '90vh' }} textAlign = "center" verticalAlign = "middle">
         <Grid.Column width = '5' textAlign = "center" style={{ maxWidth: 450 }}>
-          <Form style = {{width: 450 }} size = 'large'>
+          <Form error = {this.state.signupError == true} style = {{width: 450 }} size = 'large'>
             <Segment style = {{backgroundColor : '#fbfbfb' }} size = 'massive'>
               <Container fluid style={{ width: 420, height: 250, opacity: 0.9, display: 'inline-block', backgroundImage: "url('images/loginimage.jpg')", textAlign: 'center', backgroundSize: 'cover', padding: '80px' }} as = "h1" size = "large" textAlign = "center">
               <Header as = 'h2' style={{width: 200, color: '#000000', fontStyle: 'bold', fontSize: '50px', textAlign: 'center', display: 'inline-block'}}>Sign Up</Header>
@@ -65,11 +74,12 @@ class Signup extends React.Component
               <Form.Field>
               <input type = "password" ref = {this.password} placeholder = 'Password'/>
               </Form.Field>
+              <Message error style = {{ fontSize : '15px'}}>There is already an account associated with this e-mail address. Please try again or return to login.</Message>
               <Segment.Inline>
-                <Button inverted style={{ backgroundColor: '#aa4323', width: 182 }} onClick = {this.signup}>
+                <Button inverted value = "customer" style={{ backgroundColor: '#aa4323', width: 182 }} onClick = {this.signup}>
                     Sign up as customer
                 </Button>
-                <Button inverted style={{ backgroundColor: '#aa4323', width: 182 }} onClick = {this.signup}> 
+                <Button inverted value = "employee" style={{ backgroundColor: '#aa4323', width: 182 }} onClick = {this.signup}> 
                     Sign up as employee
                 </Button>
               </Segment.Inline>

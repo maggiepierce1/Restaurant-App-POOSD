@@ -10,8 +10,6 @@ export default async (req, res) =>
     const results = await MenuItem.find({ $text: { $search: query } });
 
     res.statusCode = 200;
-
-    console.log(results);
     
     res.json(results);
 

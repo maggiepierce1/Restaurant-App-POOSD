@@ -22,11 +22,11 @@ export default async (req, res) =>
             {
                 if (error) 
                 {
-                    console.log(error);
+                   // console.log(error);
                 } 
                 else 
                 {
-                    console.log(success);
+                   // console.log(success);
                 }
             });
         }
