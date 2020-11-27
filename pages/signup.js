@@ -35,7 +35,7 @@ class Signup extends React.Component
     }
 
     if (successfulSignup)
-      Router.push('/index');
+      Router.push('/');
     else
       alert("There is already an account associated with this e-mail address. Please try again, or return to login.");
     
