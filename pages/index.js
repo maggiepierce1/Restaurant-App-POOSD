@@ -62,7 +62,7 @@ class Login extends React.Component
             <Form.Field>
             <input type = "password" ref = {this.password} placeholder = 'Password'/>
             </Form.Field>
-            <Message style = {{ fontSize : '15px'}} error>Invalid username or password. Please try again.</Message>
+            <Message style = {{ fontSize : '15px'}} error>Invalid e-mail or password. Please try again.</Message>
             <Segment.Inline>
               <Button inverted style={{ backgroundColor: '#aa4323', width: 182 }} onClick = {this.loginAsCustomer}>
                   Log in as customer
