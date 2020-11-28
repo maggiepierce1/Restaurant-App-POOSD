@@ -36,16 +36,14 @@ class Signup extends React.Component
     else
     {
       successfulSignup = await createAccount(this.username.current.value, this.password.current.value, event.currentTarget.value);
+      if (successfulSignup == false)
+        this.setState({signupError : true});
     }
 
     if (successfulSignup == true)
     {
       this.setState({signupError : false});
       Router.push('/');
-    }
-    else
-    {
-      this.setState({signupError : true});
     }
     
     event.preventDefault();
