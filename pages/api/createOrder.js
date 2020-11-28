@@ -32,7 +32,7 @@ export default async (req, res) =>
     const currentTime = hour + ":" + minute + " " + AMorPM;
 
 
-    var newOrder = new Order({username : name, status : "received", items : cartItems, date : todaysDate, time: currentTime, pickupName: orderName});
+    var newOrder = new Order({username : name, status : "Received", items : cartItems, date : todaysDate, time: currentTime, pickupName: orderName});
     await newOrder.save();
 
     // Let's wipe the cart clean

@@ -99,11 +99,11 @@ class EmployeeHome extends React.Component
               <Divider horizontal></Divider>
               <Header as = 'h3'>Current Status: {this.state.data[this.currIndex].status}</Header>
               <Divider horizontal></Divider>
-              <Header as = 'h3'>Update status:</Header>
-              <Button value = {"received"} onClick = {this.updateOrderStatus}>Received</Button>
-              <Button value = {"preparing"} onClick = {this.updateOrderStatus}>Preparing</Button>
-              <Button value = {"done"} onClick = {this.updateOrderStatus}>Done</Button>
-              <Button value = {"picked up"} onClick = {this.updateOrderStatus}>Picked Up</Button>
+              <Header as = 'h3'>Update Status:</Header>
+              <Button value = {"Received"} onClick = {this.updateOrderStatus}>Received</Button>
+              <Button value = {"Preparing"} onClick = {this.updateOrderStatus}>Preparing</Button>
+              <Button value = {"Done"} onClick = {this.updateOrderStatus}>Done</Button>
+              <Button value = {"Picked Up"} onClick = {this.updateOrderStatus}>Picked Up</Button>
             </Modal.Content>
           </Modal>
         </>);
