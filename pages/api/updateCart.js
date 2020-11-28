@@ -1,5 +1,6 @@
 import connectToDatabase from "../../utils/connectToDatabase"
 import Cart from "../../schemas/Cart";
+import MenuItem from "../../schemas/MenuItem"
 
 connectToDatabase();
 
@@ -7,17 +8,20 @@ export default async (req, res) =>
 {
     const itemName = req.body.itemName;
     const userName = req.body.userName;
+
+    const item = await MenuItem.findOne({name : itemName});
+    const actualPrice = item.price;
     
     var userCart = await Cart.find({username : userName}, function(err, docs)
     {
         if (!docs.length)
         {
-            var newCart = new Cart({username : userName, items: [{name : itemName, price : 5.55}], numItems : 1});
+            var newCart = new Cart({username : userName, items: [{name : itemName, price : actualPrice}], numItems : 1});
             newCart.save();
         }
         else
         {
-            var newItem = {name : itemName, price : 5.55};
+            var newItem = {name : itemName, price : actualPrice};
             Cart.updateOne({username : userName}, { $push: { items : newItem }},  function (error, success) 
             {
                 if (error) 
