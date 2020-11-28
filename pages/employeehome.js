@@ -40,7 +40,7 @@ class EmployeeHome extends React.Component
     async updateOrderStatus(e)
     {
       const status = e.currentTarget.value;
-      const orderID = this.state.data[this.state.currIndex]._id;
+      const orderID = this.state.data[this.currIndex]._id;
       updateStatus(orderID, status);
       const updatedOrders = await loadOrders();
       this.setState({data : updatedOrders});
