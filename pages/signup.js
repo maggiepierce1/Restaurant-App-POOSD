@@ -25,9 +25,9 @@ class Signup extends React.Component
     const email = this.username.current.value;
     const password = this.password.current.value;
     var successfulSignup = false;
-    if (email.length >= 75 || password.length >= 75)
+    if (email.length >= 75 || password.length >= 75 || email.length <= 0 || password.length <= 0)
     {
-      alert("Input must be less than 75 characters.");
+      alert("Input must be greater than 0 and less than 75 characters.");
     }
     else if (re.test(String(this.username.current.value).toLowerCase()) == false)
     {
