@@ -15,7 +15,10 @@ export default async (req, res) =>
     if (newUser)
     {
         validUser = newUser.comparePassword(newPassword);
-        validUser = (mode == newUser.mode);
+        if (validUser == true)
+        {
+            validUser = (mode == newUser.mode);
+        }
     }
     res.statusCode = 200;
     res.send(validUser);
