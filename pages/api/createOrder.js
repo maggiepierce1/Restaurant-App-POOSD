@@ -33,11 +33,11 @@ export default async (req, res) =>
 
 
     var newOrder = new Order({username : name, status : "received", items : cartItems, date : todaysDate, time: currentTime, pickupName: orderName});
-    newOrder.save();
+    await newOrder.save();
 
     // Let's wipe the cart clean
     const newItems = [];
-    Cart.updateOne({username : name}, { $set: { items : newItems }},  function (error, success) 
+    await Cart.updateOne({username : name}, { $set: { items : newItems }},  function (error, success) 
     {
         if (error) 
         {

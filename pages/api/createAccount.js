@@ -20,7 +20,7 @@ export default async (req, res) =>
     else
     {
         var newUser = new User({email : username, password : newPassword, mode : newMode});
-        newUser.save();
+        await newUser.save();
         validUser = true;
     }
 

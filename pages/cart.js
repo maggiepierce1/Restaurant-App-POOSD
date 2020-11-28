@@ -35,7 +35,7 @@ class Cart extends React.Component
         this.setState({data : items});
         this.setState({hasCartItems : true});
     }
-    handlePayment(e)
+    async handlePayment(e)
     {
         if (this.orderName.current.value == "")
         {
@@ -44,7 +44,7 @@ class Cart extends React.Component
         else 
         {
             this.setState({noName : false});
-            createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax, this.orderName.current.value);
+            await createOrder(this.state.username, this.state.data, this.state.total, this.state.totalWithTax, this.orderName.current.value);
             Router.push('/orderstatus');
         }
         e.preventDefault();

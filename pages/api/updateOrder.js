@@ -7,7 +7,7 @@ export default async (req, res) =>
 {
     const id = req.body.id;
     const newStatus = req.body.newStatus;
-    Order.updateOne({_id : id}, { $set: { status : newStatus }},  function (error, success) 
+    await Order.updateOne({_id : id}, { $set: { status : newStatus }},  function (error, success) 
     {
         if (error) 
         {
