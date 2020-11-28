@@ -118,7 +118,7 @@ class EmployeeHome extends React.Component
 export async function updateStatus(id, newStatus)
 {
   // const url = "http://localhost:3000/api/updateOrder"
-  const url = "https://poosdrestaurantapp.vercel.app/updateOrder"
+  const url = "https://poosdrestaurantapp.vercel.app/api/updateOrder"
   const response = await axios.post(url, { id, newStatus });
 }
 
