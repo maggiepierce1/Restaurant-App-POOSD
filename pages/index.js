@@ -50,7 +50,7 @@ class Login extends React.Component
   {
     return (<>
     <Grid stretched style={{ height: '90vh' }} textAlign = "center" verticalAlign = "middle">
-      <Grid.Column mobile = '16' width = '5' textAlign = "center" style={{ maxWidth: 450 }}>
+      <Grid.Column mobile = '16' textAlign = "center" style={{ maxWidth: 450 }}>
         <Form error = {this.state.loginError == true} style = {{width: 450 }} size = 'large'>
           <Segment style = {{backgroundColor : '#fbfbfb' }} size = 'massive'>
             <Container fluid style={{ width: 420, height: 250, opacity: 0.9, display: 'inline-block', backgroundImage: "url('images/loginimage.jpg')", textAlign: 'center', backgroundSize: 'cover', padding: '80px' }} as = "h1" size = "large" textAlign = "center">

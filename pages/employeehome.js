@@ -14,7 +14,7 @@ class EmployeeHome extends React.Component
         this.state = {data : {orders: []}};
         this.state = {mOpen : false};
         this.state = {hasOrders : false};
-        this.state = {currIndex : 0};
+        this.currIndex = 0;
         this.state = {noOrders : false};
     }
     async componentDidMount()
@@ -28,7 +28,7 @@ class EmployeeHome extends React.Component
     triggerOrderDetailsModal(e)
     {
       const index = e.currentTarget.value;
-      this.setState({currIndex : index});
+      this.currIndex = index;
       this.setState({mOpen : true});
       e.preventDefault();
     }
@@ -90,14 +90,14 @@ class EmployeeHome extends React.Component
           <Modal open = {this.state.mOpen} closeIcon onClose = {this.closeModal}>
             <Modal.Content>
               <Header as = 'h1'>Order Contents:</Header>
-              <Segment>
-                  {this.state.data[this.state.currIndex].items.map((item) => 
-                  {
-                    return (<Container textAlign = "left">{item.name}</Container>);
-                  })}
-              </Segment>
+                <Segment>
+                    {this.state.data[this.currIndex].items.map((item) => 
+                    {
+                      return (<Container textAlign = "left">{item.name}</Container>);
+                    })}
+                </Segment>
               <Divider horizontal></Divider>
-              <Header as = 'h3'>Current Status: {this.state.data[this.state.currIndex].status}</Header>
+              <Header as = 'h3'>Current Status: {this.state.data[this.currIndex].status}</Header>
               <Divider horizontal></Divider>
               <Header as = 'h3'>Update status:</Header>
               <Button value = {"received"} onClick = {this.updateOrderStatus}>Received</Button>
