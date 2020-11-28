@@ -68,7 +68,7 @@ class EmployeeHome extends React.Component
                   <Menu vertical fluid>
                       {this.state.data && this.state.data.map((order, index) =>
                       {
-                        if (order.status != "picked up")
+                        if (order.status != "Picked Up")
                         {
                           return (<Menu.Item key = {index}>
                                     <Grid>
